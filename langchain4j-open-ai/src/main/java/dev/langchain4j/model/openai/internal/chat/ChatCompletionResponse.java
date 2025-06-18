@@ -22,9 +22,11 @@ public final class ChatCompletionResponse {
     @JsonProperty
     private final String id;
     @JsonProperty
-    private final Long created;
+    private String object;
     @JsonProperty
-    private final String model;
+    private String model;
+    @JsonProperty
+    private final Long created;
     @JsonProperty
     private final List<ChatCompletionChoice> choices;
     @JsonProperty
@@ -38,6 +40,7 @@ public final class ChatCompletionResponse {
         this.id = builder.id;
         this.created = builder.created;
         this.model = builder.model;
+        this.object = builder.object;
         this.choices = builder.choices;
         this.usage = builder.usage;
         this.systemFingerprint = builder.systemFingerprint;
@@ -72,6 +75,13 @@ public final class ChatCompletionResponse {
         return serviceTier;
     }
 
+    public String object() { return object;}
+
+
+    public void model(String model) { this.model = model;}
+
+    public void object(String Object) { this.object = Object;}
+
     /**
      * Convenience method to get the content of the message from the first choice.
      */
@@ -90,6 +100,7 @@ public final class ChatCompletionResponse {
         return Objects.equals(id, another.id)
                 && Objects.equals(created, another.created)
                 && Objects.equals(model, another.model)
+                && Objects.equals(object, another.object)
                 && Objects.equals(choices, another.choices)
                 && Objects.equals(usage, another.usage)
                 && Objects.equals(systemFingerprint, another.systemFingerprint)
@@ -104,6 +115,7 @@ public final class ChatCompletionResponse {
         h += (h << 5) + Objects.hashCode(model);
         h += (h << 5) + Objects.hashCode(choices);
         h += (h << 5) + Objects.hashCode(usage);
+        h += (h << 5) + Objects.hashCode(object);
         h += (h << 5) + Objects.hashCode(systemFingerprint);
         h += (h << 5) + Objects.hashCode(serviceTier);
         return h;
@@ -115,6 +127,7 @@ public final class ChatCompletionResponse {
                 + "id=" + id
                 + ", created=" + created
                 + ", model=" + model
+                + ", object=" + object
                 + ", choices=" + choices
                 + ", usage=" + usage
                 + ", systemFingerprint=" + systemFingerprint
@@ -133,6 +146,7 @@ public final class ChatCompletionResponse {
 
         private String id;
         private Long created;
+        private String object;
         private String model;
         private List<ChatCompletionChoice> choices;
         private Usage usage;
@@ -163,6 +177,11 @@ public final class ChatCompletionResponse {
 
         public Builder usage(Usage usage) {
             this.usage = usage;
+            return this;
+        }
+
+        public Builder object(String object) {
+            this.object = object;
             return this;
         }
 

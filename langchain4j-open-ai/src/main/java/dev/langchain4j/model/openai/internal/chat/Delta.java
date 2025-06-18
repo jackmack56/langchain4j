@@ -20,6 +20,8 @@ public final class Delta {
 
     @JsonProperty
     private final String role;
+    @JsonProperty(value = "reasoning")
+    private final String reasoningContent;
     @JsonProperty
     private final String content;
     @JsonProperty
@@ -33,6 +35,7 @@ public final class Delta {
         this.content = builder.content;
         this.toolCalls = builder.toolCalls;
         this.functionCall = builder.functionCall;
+        this.reasoningContent = builder.reasoningContent;
     }
 
     public String role() {
@@ -45,6 +48,10 @@ public final class Delta {
 
     public List<ToolCall> toolCalls() {
         return toolCalls;
+    }
+
+    public String reasoningContent() {
+        return reasoningContent;
     }
 
     @Deprecated
@@ -80,6 +87,7 @@ public final class Delta {
     public String toString() {
         return "Delta{"
                 + "role=" + role
+                + ", reasoningContent=" + reasoningContent
                 + ", content=" + content
                 + ", toolCalls=" + toolCalls
                 + ", functionCall=" + functionCall
@@ -97,6 +105,7 @@ public final class Delta {
 
         private String role;
         private String content;
+        private String reasoningContent;
         private List<ToolCall> toolCalls;
         @Deprecated
         private FunctionCall functionCall;
@@ -115,6 +124,11 @@ public final class Delta {
             if (toolCalls != null) {
                 this.toolCalls = unmodifiableList(toolCalls);
             }
+            return this;
+        }
+
+        public Builder reasoningContent(String reasoningContent) {
+            this.reasoningContent = reasoningContent;
             return this;
         }
 
