@@ -23,12 +23,15 @@ public final class ChatCompletionChoice {
     private final Delta delta;
     @JsonProperty
     private final String finishReason;
+    @JsonProperty
+    private final SecuritySuggest securitySuggest;
 
     public ChatCompletionChoice(Builder builder) {
         this.index = builder.index;
         this.message = builder.message;
         this.delta = builder.delta;
         this.finishReason = builder.finishReason;
+        this.securitySuggest = builder.securitySuggest;
     }
 
     public Integer index() {
@@ -47,6 +50,10 @@ public final class ChatCompletionChoice {
         return finishReason;
     }
 
+    public SecuritySuggest securitySuggest() {
+        return securitySuggest;
+    }
+
     @Override
     public boolean equals(Object another) {
         if (this == another) return true;
@@ -58,7 +65,8 @@ public final class ChatCompletionChoice {
         return Objects.equals(index, another.index)
                 && Objects.equals(message, another.message)
                 && Objects.equals(delta, another.delta)
-                && Objects.equals(finishReason, another.finishReason);
+                && Objects.equals(finishReason, another.finishReason)
+                && Objects.equals(securitySuggest, another.securitySuggest);
     }
 
     @Override
@@ -68,6 +76,7 @@ public final class ChatCompletionChoice {
         h += (h << 5) + Objects.hashCode(message);
         h += (h << 5) + Objects.hashCode(delta);
         h += (h << 5) + Objects.hashCode(finishReason);
+        h += (h << 5) + Objects.hashCode(securitySuggest);
         return h;
     }
 
@@ -78,6 +87,7 @@ public final class ChatCompletionChoice {
                 + ", message=" + message
                 + ", delta=" + delta
                 + ", finishReason=" + finishReason
+                + ", securitySuggest=" + securitySuggest
                 + "}";
     }
 
@@ -92,6 +102,7 @@ public final class ChatCompletionChoice {
 
         private Integer index;
         private AssistantMessage message;
+        private SecuritySuggest securitySuggest;
         private Delta delta;
         private String finishReason;
 
@@ -112,6 +123,11 @@ public final class ChatCompletionChoice {
 
         public Builder finishReason(String finishReason) {
             this.finishReason = finishReason;
+            return this;
+        }
+
+        public Builder SecuritySuggest(SecuritySuggest securitySuggest) {
+            this.securitySuggest = securitySuggest;
             return this;
         }
 

@@ -160,11 +160,7 @@ public class AiStreamingChatModel implements AiStreamChatModel {
         if (delta == null) {
             return;
         }
-
-        String content = delta.content();
-        if (!isNullOrEmpty(content)) {
-            handler.onPartialResponse(partialResponse);
-        }
+        handler.onPartialResponse(partialResponse);
     }
 
     @Override

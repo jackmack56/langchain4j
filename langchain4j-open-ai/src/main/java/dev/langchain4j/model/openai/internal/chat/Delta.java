@@ -20,7 +20,7 @@ public final class Delta {
 
     @JsonProperty
     private final String role;
-    @JsonProperty(value = "reasoning")
+    @JsonProperty
     private final String reasoningContent;
     @JsonProperty
     private final String content;
@@ -59,6 +59,7 @@ public final class Delta {
         return functionCall;
     }
 
+
     @Override
     public boolean equals(Object another) {
         if (this == another) return true;
@@ -68,6 +69,7 @@ public final class Delta {
 
     private boolean equalTo(Delta another) {
         return Objects.equals(role, another.role)
+                && Objects.equals(reasoningContent, another.reasoningContent)
                 && Objects.equals(content, another.content)
                 && Objects.equals(toolCalls, another.toolCalls)
                 && Objects.equals(functionCall, another.functionCall);
@@ -77,6 +79,7 @@ public final class Delta {
     public int hashCode() {
         int h = 5381;
         h += (h << 5) + Objects.hashCode(role);
+        h += (h << 5) + Objects.hashCode(reasoningContent);
         h += (h << 5) + Objects.hashCode(content);
         h += (h << 5) + Objects.hashCode(toolCalls);
         h += (h << 5) + Objects.hashCode(functionCall);
@@ -137,6 +140,7 @@ public final class Delta {
             this.functionCall = functionCall;
             return this;
         }
+
 
         public Delta build() {
             return new Delta(this);
